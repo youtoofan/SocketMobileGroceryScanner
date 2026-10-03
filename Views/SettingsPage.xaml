@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:SocketMobileGroceryScanner.ViewModels"
+             x:Class="SocketMobileGroceryScanner.Views.SettingsPage"
+             x:DataType="vm:SettingsViewModel"
+             Shell.NavBarIsVisible="False">
+
+    <Grid RowDefinitions="Auto,*">
+
+        <!-- Dark header with profile-style info -->
+        <VerticalStackLayout Grid.Row="0" BackgroundColor="{StaticResource HeaderBg}"
+                             Padding="24,20" Spacing="8">
+            <Label Text="Settings" FontSize="24" FontAttributes="Bold" TextColor="White" />
+            <Label Text="{Binding ScannerName}" TextColor="#D4A0B0" FontSize="14" />
+        </VerticalStackLayout>
+
+        <ScrollView Grid.Row="1" Padding="16,12">
+            <VerticalStackLayout Spacing="16">
+
+                <!-- Scanner section -->
+                <Border Style="{StaticResource Card}" Padding="0">
+                    <VerticalStackLayout>
+                        <Label Text="SCANNER" Style="{StaticResource MutedLabel}"
+                               Margin="16,14,16,4" FontAttributes="Bold" />
+                        <Grid Style="{StaticResource SettingsRow}">
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding OpenScannerConnectCommand}" />
+                            </Grid.GestureRecognizers>
+                            <Label Grid.Column="0" Text="📡" FontSize="20" VerticalOptions="Center" />
+                            <VerticalStackLayout Grid.Column="1" VerticalOptions="Center">
+                                <Label Text="Scanner Connection" Style="{StaticResource BodyLabel}" />
+                                <Label Text="{Binding ScannerName}" Style="{StaticResource MutedLabel}" />
+                            </VerticalStackLayout>
+                            <Grid Grid.Column="2" ColumnDefinitions="Auto,Auto" ColumnSpacing="8"
+                                  VerticalOptions="Center">
+                                <Ellipse WidthRequest="14" HeightRequest="14"
+                                         VerticalOptions="Center"
+                                         Fill="{Binding ScannerStatus, Converter={StaticResource ScannerStatusToColorConverter}}" />
+                                <Label Grid.Column="1" Text="›" FontSize="22"
+                                       TextColor="{StaticResource Muted}" VerticalOptions="Center" />
+                            </Grid>
+                        </Grid>
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Microsoft To Do section -->
+                <Border Style="{StaticResource Card}" Padding="0">
+                    <VerticalStackLayout>
+                        <Label Text="MICROSOFT TO DO" Style="{StaticResource MutedLabel}"
+                               Margin="16,14,16,4" FontAttributes="Bold" />
+
+                        <!-- Signed-in state -->
+                        <Grid Style="{StaticResource SettingsRow}"
+                              IsVisible="{Binding IsToDoSignedIn}">
+                            <Label Grid.Column="0" Text="👤" FontSize="20" VerticalOptions="Center" />
+                            <VerticalStackLayout Grid.Column="1" VerticalOptions="Center">
+                                <Label Text="Signed in as" Style="{StaticResource MutedLabel}" />
+                                <Label Text="{Binding ToDoUserName}" Style="{StaticResource BodyLabel}"
+                                       FontAttributes="Bold" />
+                            </VerticalStackLayout>
+                            <Button Grid.Column="2" Text="Sign Out"
+                                    Command="{Binding SignOutToDoCommand}"
+                                    Style="{StaticResource SecondaryButton}"
+                                    HeightRequest="36" Padding="16,0" FontSize="13" />
+                        </Grid>
+
+                        <!-- List picker: choose which Microsoft To Do list to sync -->
+                        <Grid Style="{StaticResource SettingsRow}"
+                              IsVisible="{Binding IsToDoSignedIn}"
+                              ColumnDefinitions="36,*,Auto">
+                            <Label Grid.Column="0" Text="📋" FontSize="20" VerticalOptions="Center" />
+                            <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="2">
+                                <Label Text="Synced list" Style="{StaticResource MutedLabel}" />
+                                <Picker ItemsSource="{Binding AvailableLists}"
+                                        ItemDisplayBinding="{Binding Name}"
+                                        SelectedItem="{Binding SelectedList}"
+                                        FontSize="14"
+                                        IsVisible="{Binding AvailableLists.Count, Converter={StaticResource IntToBoolConverter}}" />
+                                <Label Text="No lists found in Microsoft To Do"
+                                       Style="{StaticResource MutedLabel}"
+                                       IsVisible="{Binding AvailableLists.Count, Converter={StaticResource IntToInverseBoolConverter}}" />
+                            </VerticalStackLayout>
+                            <Button Grid.Column="2" Text="New List"
+                                    Command="{Binding CreateDefaultListCommand}"
+                                    Style="{StaticResource SecondaryButton}"
+                                    HeightRequest="36" Padding="12,0" FontSize="12" />
+                        </Grid>
+
+                        <!-- Signed-out state -->
+                        <Grid Style="{StaticResource SettingsRow}"
+                              IsVisible="{Binding IsToDoSignedIn, Converter={StaticResource InverseBoolConverter}}">
+                            <Label Grid.Column="0" Text="🔑" FontSize="20" VerticalOptions="Center" />
+                            <Label Grid.Column="1" Text="Connect your account to sync shopping lists"
+                                   Style="{StaticResource BodyLabel}" VerticalOptions="Center" />
+                            <Button Grid.Column="2" Text="Sign In"
+                                    Command="{Binding SignInToDoCommand}"
+                                    Style="{StaticResource PrimaryButton}"
+                                    HeightRequest="36" Padding="16,0" FontSize="13" />
+                        </Grid>
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Data section -->
+                <Border Style="{StaticResource Card}" Padding="0">
+                    <VerticalStackLayout>
+                        <Label Text="DATA" Style="{StaticResource MutedLabel}"
+                               Margin="16,14,16,4" FontAttributes="Bold" />
+
+                        <Grid Style="{StaticResource SettingsRow}">
+                            <Label Grid.Column="0" Text="💾" FontSize="20" VerticalOptions="Center" />
+                            <VerticalStackLayout Grid.Column="1" VerticalOptions="Center">
+                                <Label Text="Product Cache" Style="{StaticResource BodyLabel}" />
+                                <Label Text="{Binding CacheInfo}" Style="{StaticResource MutedLabel}" />
+                            </VerticalStackLayout>
+                            <Button Grid.Column="2" Text="Clear"
+                                    Command="{Binding ClearCacheCommand}"
+                                    BackgroundColor="{StaticResource SurfaceVariant}"
+                                    TextColor="{StaticResource Danger}"
+                                    HeightRequest="36" Padding="16,0" FontSize="13"
+                                    CornerRadius="20" />
+                        </Grid>
+
+                        <Grid Style="{StaticResource SettingsRow}">
+                            <Label Grid.Column="0" Text="🌐" FontSize="20" VerticalOptions="Center" />
+                            <VerticalStackLayout Grid.Column="1" VerticalOptions="Center">
+                                <Label Text="Non-Dutch Product Names" Style="{StaticResource BodyLabel}" />
+                                <Label Text="Translate names fetched in French/German/etc. to Dutch"
+                                       Style="{StaticResource MutedLabel}" />
+                            </VerticalStackLayout>
+                            <Button Grid.Column="2"
+                                    Text="{Binding IsTranslating, Converter={StaticResource BoolToTranslateTextConverter}}"
+                                    Command="{Binding RetranslateNamesCommand}"
+                                    IsEnabled="{Binding IsTranslating, Converter={StaticResource InverseBoolConverter}}"
+                                    Style="{StaticResource SecondaryButton}"
+                                    HeightRequest="36" Padding="12,0" FontSize="12" />
+                        </Grid>
+
+                        <Grid Style="{StaticResource SettingsRow}">
+                            <Label Grid.Column="0" Text="🖼" FontSize="20" VerticalOptions="Center" />
+                            <VerticalStackLayout Grid.Column="1" VerticalOptions="Center">
+                                <Label Text="Missing Product Images" Style="{StaticResource BodyLabel}" />
+                                <Label Text="Find free fallback photos for items without one"
+                                       Style="{StaticResource MutedLabel}" />
+                            </VerticalStackLayout>
+                            <Button Grid.Column="2"
+                                    Text="{Binding IsFetchingImages, Converter={StaticResource BoolToFetchImagesTextConverter}}"
+                                    Command="{Binding FetchMissingImagesCommand}"
+                                    IsEnabled="{Binding IsFetchingImages, Converter={StaticResource InverseBoolConverter}}"
+                                    Style="{StaticResource SecondaryButton}"
+                                    HeightRequest="36" Padding="12,0" FontSize="12" />
+                        </Grid>
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- App info -->
+                <Label Text="Grocery Scanner v1.0" Style="{StaticResource MutedLabel}"
+                       HorizontalOptions="Center" Margin="0,8" />
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

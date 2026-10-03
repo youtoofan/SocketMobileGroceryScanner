@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:SocketMobileGroceryScanner.ViewModels"
+             xmlns:m="clr-namespace:SocketMobileGroceryScanner.Models"
+             x:Class="SocketMobileGroceryScanner.Views.InventoryPage"
+             x:DataType="vm:InventoryViewModel"
+             Shell.NavBarIsVisible="False">
+
+    <Grid RowDefinitions="Auto,Auto,*,Auto">
+
+        <!-- Dark header bar (screenshot-style) -->
+        <Grid Grid.Row="0" BackgroundColor="{StaticResource HeaderBg}"
+              Padding="20,12" ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12">
+            <Ellipse WidthRequest="12" HeightRequest="12" VerticalOptions="Center"
+                     Fill="{Binding ScannerStatus, Converter={StaticResource ScannerStatusToColorConverter}}" />
+            <Label Grid.Column="1" Text="{Binding ScannerName}" TextColor="White"
+                   FontSize="14" VerticalOptions="Center" />
+            <Button Grid.Column="2"
+                    Text="{Binding ScanModeActive, Converter={StaticResource BoolToScanModeTextConverter}}"
+                    Command="{Binding ToggleScanModeCommand}"
+                    BackgroundColor="{StaticResource Primary}" TextColor="White"
+                    FontSize="13" FontAttributes="Bold" CornerRadius="20"
+                    HeightRequest="36" Padding="16,0" />
+        </Grid>
+
+        <!-- Page title + last scan -->
+        <Grid Grid.Row="1" ColumnDefinitions="*,Auto" Padding="20,14,20,6">
+            <Label Text="Inventory" Style="{StaticResource HeadlineLabel}" />
+            <Label Grid.Column="1" Text="{Binding LastScanMessage}"
+                   Style="{StaticResource MutedLabel}" VerticalOptions="Center" />
+        </Grid>
+
+        <!-- Product grid -->
+        <RefreshView Grid.Row="2" Command="{Binding LoadCommand}" IsRefreshing="{Binding IsBusy}">
+            <CollectionView ItemsSource="{Binding Items}"
+                            SelectionMode="None"
+                            ItemSizingStrategy="MeasureFirstItem"
+                            Margin="12,0">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical" Span="2"
+                                     HorizontalItemSpacing="10" VerticalItemSpacing="10" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.EmptyView>
+                    <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center"
+                                         Spacing="12" Padding="48">
+                        <Label Text="📦" FontSize="56" HorizontalOptions="Center" />
+                        <Label Text="No items yet" Style="{StaticResource TitleLabel}"
+                               HorizontalOptions="Center" />
+                        <Label Text="Scan barcodes to build your inventory"
+                               Style="{StaticResource MutedLabel}" HorizontalOptions="Center"
+                               HorizontalTextAlignment="Center" />
+                    </VerticalStackLayout>
+                </CollectionView.EmptyView>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="m:InventoryItem">
+                        <Border Style="{StaticResource Card}" Margin="4">
+                            <Grid RowDefinitions="110,Auto,Auto" Padding="10">
+                                <Image Grid.Row="0" Source="{Binding Product.ImageUrl}"
+                                       Aspect="AspectFit" HeightRequest="110">
+                                    <Image.Triggers>
+                                        <DataTrigger TargetType="Image" Binding="{Binding Product.ImageUrl}" Value="{x:Null}">
+                                            <Setter Property="Source" Value="dotnet_bot.png" />
+                                        </DataTrigger>
+                                    </Image.Triggers>
+                                </Image>
+                                <VerticalStackLayout Grid.Row="1" Spacing="2" Padding="4,8,4,4">
+                                    <Label Text="{Binding Product.Name}" Style="{StaticResource BodyLabel}"
+                                           FontAttributes="Bold" LineBreakMode="TailTruncation" MaxLines="1" />
+                                    <Label Text="{Binding Product.Brand}" Style="{StaticResource MutedLabel}"
+                                           LineBreakMode="TailTruncation" MaxLines="1" />
+                                </VerticalStackLayout>
+                                <Grid Grid.Row="2" ColumnDefinitions="*,Auto,Auto,Auto"
+                                      Padding="4,0" VerticalOptions="End">
+                                    <Button Grid.Column="1" Text="−" Style="{StaticResource QtyButton}"
+                                            x:DataType="vm:InventoryViewModel"
+                                            Command="{Binding DecrementCommand}" />
+                                    <Label Grid.Column="2" Text="{Binding Quantity}"
+                                           x:DataType="m:InventoryItem"
+                                           FontSize="18" FontAttributes="Bold"
+                                           VerticalOptions="Center" HorizontalOptions="Center"
+                                           WidthRequest="36" HorizontalTextAlignment="Center"
+                                           TextColor="{StaticResource Primary}" />
+                                    <Button Grid.Column="3" Text="+" Style="{StaticResource QtyButton}"
+                                            x:DataType="vm:InventoryViewModel"
+                                            Command="{Binding IncrementCommand}" />
+                                </Grid>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
+
+        <!-- Desktop test-scan bar -->
+        <Border Grid.Row="3" Padding="16,10"
+                BackgroundColor="{AppThemeBinding Light={StaticResource SurfaceVariant}, Dark={StaticResource SurfaceVariantDark}}">
+            <Border.IsVisible>
+                <OnPlatform x:TypeArguments="x:Boolean">
+                    <On Platform="WinUI" Value="True" />
+                    <On Platform="Android" Value="False" />
+                </OnPlatform>
+            </Border.IsVisible>
+            <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="8">
+                <Label Grid.Column="0" Text="🖥 Test:" VerticalOptions="Center"
+                       FontSize="14" TextColor="{StaticResource Muted}" />
+                <Entry Grid.Column="1" Text="{Binding TestBarcodeInput}"
+                       Placeholder="Enter barcode" FontSize="14"
+                       ReturnCommand="{Binding TestScanCommand}" ReturnType="Go" />
+                <Button Grid.Column="2" Text="Scan" Command="{Binding TestScanCommand}"
+                        BackgroundColor="{StaticResource Primary}" TextColor="White"
+                        FontSize="13" CornerRadius="20" HeightRequest="36" Padding="16,0" />
+            </Grid>
+        </Border>
+    </Grid>
+</ContentPage>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="456" height="456" viewBox="0 0 456 456" xmlns="http://www.w3.org/2000/svg">
+  <g transform="translate(228,228)">
+    <rect x="-70" y="-50" width="10" height="100" rx="2" fill="white"/>
+    <rect x="-50" y="-50" width="6" height="100" rx="2" fill="white"/>
+    <rect x="-36" y="-50" width="14" height="100" rx="2" fill="white"/>
+    <rect x="-14" y="-50" width="6" height="100" rx="2" fill="white"/>
+    <rect x="0" y="-50" width="10" height="100" rx="2" fill="white"/>
+    <rect x="18" y="-50" width="6" height="100" rx="2" fill="white"/>
+    <rect x="32" y="-50" width="14" height="100" rx="2" fill="white"/>
+    <rect x="54" y="-50" width="6" height="100" rx="2" fill="white"/>
+    <rect x="68" y="-50" width="10" height="100" rx="2" fill="white" opacity="0.6"/>
+    <line x1="-80" y1="0" x2="85" y2="0" stroke="#E8603C" stroke-width="4" stroke-linecap="round"/>
+    <path d="M-80,-60 L-80,-75 L-60,-75" fill="none" stroke="white" stroke-width="6" stroke-linecap="round"/>
+    <path d="M80,-60 L80,-75 L60,-75" fill="none" stroke="white" stroke-width="6" stroke-linecap="round"/>
+    <path d="M-80,60 L-80,75 L-60,75" fill="none" stroke="white" stroke-width="6" stroke-linecap="round"/>
+    <path d="M80,60 L80,75 L60,75" fill="none" stroke="white" stroke-width="6" stroke-linecap="round"/>
+  </g>
+</svg>

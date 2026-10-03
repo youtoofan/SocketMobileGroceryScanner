@@ -1,0 +1,31 @@
+# Build artifacts
+bin/
+obj/
+*.apk
+*.aab
+*.idsig
+
+# Visual Studio / Rider
+.vs/
+.idea/
+*.user
+*.suo
+
+# Android Manifest contains the real SocketMobile SDK APP_KEY / DEVELOPER_ID
+# (vendor-issued license credentials tied to this app's package name/signing
+# certificate). Keep a sanitized template in source control instead and
+# never commit the real manifest.
+Platforms/Android/AndroidManifest.xml
+
+# MSAL token cache / local secrets that might get dropped into the working tree
+**/MSAL/
+*.pfx
+*.keystore
+*.jks
+secrets.json
+appsettings.*.json
+!appsettings.json
+
+# OS cruft
+.DS_Store
+Thumbs.db

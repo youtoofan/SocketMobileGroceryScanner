@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:SocketMobileGroceryScanner.ViewModels"
+             xmlns:m="clr-namespace:SocketMobileGroceryScanner.Models"
+             x:Class="SocketMobileGroceryScanner.Views.ShoppingListPage"
+             x:Name="Root"
+             x:DataType="vm:ShoppingListViewModel"
+             Shell.NavBarIsVisible="False">
+
+    <Grid RowDefinitions="Auto,Auto,*,Auto,Auto">
+
+        <!-- Dark header -->
+        <Grid Grid.Row="0" BackgroundColor="{StaticResource HeaderBg}"
+              Padding="20,12" ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12">
+            <Ellipse WidthRequest="12" HeightRequest="12" VerticalOptions="Center"
+                     Fill="{Binding ScannerStatus, Converter={StaticResource ScannerStatusToColorConverter}}" />
+            <Label Grid.Column="1" Text="{Binding ScannerName}" TextColor="White"
+                   FontSize="14" VerticalOptions="Center" />
+            <Label Grid.Column="2" Text="{Binding LastScanMessage}" TextColor="#D4A0B0"
+                   FontSize="13" VerticalOptions="Center" />
+        </Grid>
+
+        <!-- Page title -->
+        <Label Grid.Row="1" Text="Shopping List" Style="{StaticResource HeadlineLabel}"
+               Padding="20,14,20,6" />
+
+        <!-- List -->
+        <ScrollView Grid.Row="2">
+            <VerticalStackLayout Padding="12,0" Spacing="0">
+
+                <!-- Needed section header -->
+                <Label Text="NEEDED" FontSize="12" FontAttributes="Bold"
+                       TextColor="{StaticResource Primary}" Margin="8,8,8,6"
+                       IsVisible="{Binding Needed.Count, Converter={StaticResource IntToBoolConverter}}" />
+
+                <CollectionView ItemsSource="{Binding Needed}" SelectionMode="None"
+                                ItemSizingStrategy="MeasureFirstItem">
+                    <CollectionView.EmptyView>
+                        <Label Text="Your list is empty — scan items to add them! 🛒"
+                               Style="{StaticResource MutedLabel}" Margin="8,20"
+                               HorizontalOptions="Center" />
+                    </CollectionView.EmptyView>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="m:ShoppingListItem">
+                            <Border Style="{StaticResource Card}" Margin="4,4">
+                                <Grid ColumnDefinitions="56,*,Auto" MinimumHeightRequest="68" Padding="10,8">
+                                    <Image Grid.Column="0" Source="{Binding Product.ImageUrl}"
+                                           Aspect="AspectFit" HeightRequest="48" WidthRequest="48"
+                                           VerticalOptions="Center" />
+                                    <VerticalStackLayout Grid.Column="1" Spacing="2"
+                                                         VerticalOptions="Center" Margin="12,0">
+                                        <Label Text="{Binding Product.DisplayName}" Style="{StaticResource BodyLabel}"
+                                               FontAttributes="Bold" LineBreakMode="TailTruncation" />
+                                        <Label Text="{Binding Product.Brand}" Style="{StaticResource MutedLabel}" />
+                                    </VerticalStackLayout>
+                                    <VerticalStackLayout Grid.Column="2" VerticalOptions="Center"
+                                                         HorizontalOptions="End" Spacing="4">
+                                        <Border BackgroundColor="{StaticResource Primary}"
+                                                StrokeShape="RoundRectangle 10" Padding="10,3"
+                                                HorizontalOptions="End">
+                                            <Label Text="{Binding NeededQty, StringFormat='x{0}'}"
+                                                   TextColor="White" FontSize="14" FontAttributes="Bold" />
+                                        </Border>
+                                        <Button Text="✕" BackgroundColor="Transparent"
+                                                TextColor="{StaticResource Muted}" FontSize="16"
+                                                Command="{Binding Source={x:Reference Root}, Path=BindingContext.RemoveItemCommand}"
+                                                CommandParameter="{Binding .}" Padding="0" HeightRequest="30" />
+                                    </VerticalStackLayout>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                <!-- Done section -->
+                <Label Text="DONE ✓" FontSize="12" FontAttributes="Bold"
+                       TextColor="{StaticResource Found}" Margin="8,16,8,6"
+                       IsVisible="{Binding Found.Count, Converter={StaticResource IntToBoolConverter}}" />
+
+                <CollectionView ItemsSource="{Binding Found}" SelectionMode="None"
+                                ItemSizingStrategy="MeasureFirstItem">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="m:ShoppingListItem">
+                            <Border Margin="4,4" StrokeShape="RoundRectangle 16"
+                                    BackgroundColor="{StaticResource FoundBackground}"
+                                    Stroke="{StaticResource Found}" StrokeThickness="1">
+                                <Grid ColumnDefinitions="56,*,Auto" MinimumHeightRequest="68" Padding="10,8">
+                                    <Image Grid.Column="0" Source="{Binding Product.ImageUrl}"
+                                           Aspect="AspectFit" HeightRequest="48" WidthRequest="48"
+                                           VerticalOptions="Center" Opacity="0.5" />
+                                    <VerticalStackLayout Grid.Column="1" Spacing="2"
+                                                         VerticalOptions="Center" Margin="12,0">
+                                        <Label Text="{Binding Product.DisplayName}" Style="{StaticResource BodyLabel}"
+                                               FontAttributes="Bold" TextDecorations="Strikethrough"
+                                               TextColor="{StaticResource Muted}" LineBreakMode="TailTruncation" />
+                                        <Label Text="{Binding Product.Brand}" Style="{StaticResource MutedLabel}" />
+                                    </VerticalStackLayout>
+                                    <Label Grid.Column="2" Text="✓" FontSize="24"
+                                           TextColor="{StaticResource Found}" VerticalOptions="Center" />
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <!-- Bottom action bar -->
+        <Grid Grid.Row="3" ColumnDefinitions="*,*"
+              Padding="16,10" ColumnSpacing="10"
+              BackgroundColor="{AppThemeBinding Light={StaticResource Surface}, Dark={StaticResource SurfaceDark}}">
+            <Button Grid.Column="0"
+                    Text="{Binding IsSyncing, Converter={StaticResource BoolToSyncTextConverter}}"
+                    Command="{Binding AutoSyncCommand}"
+                    IsEnabled="{Binding CanSync}"
+                    Style="{StaticResource PrimaryButton}" />
+            <Button Grid.Column="1" Text="Clear Done"
+                    Command="{Binding ClearFoundCommand}"
+                    Style="{StaticResource SecondaryButton}"
+                    IsEnabled="{Binding Found.Count, Converter={StaticResource IntToBoolConverter}}" />
+        </Grid>
+
+        <!-- Desktop test-scan bar -->
+        <Border Grid.Row="4" Padding="16,10"
+                BackgroundColor="{AppThemeBinding Light={StaticResource SurfaceVariant}, Dark={StaticResource SurfaceVariantDark}}">
+            <Border.IsVisible>
+                <OnPlatform x:TypeArguments="x:Boolean">
+                    <On Platform="WinUI" Value="True" />
+                    <On Platform="Android" Value="False" />
+                </OnPlatform>
+            </Border.IsVisible>
+            <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="8">
+                <Label Grid.Column="0" Text="🖥 Test:" VerticalOptions="Center"
+                       FontSize="14" TextColor="{StaticResource Muted}" />
+                <Entry Grid.Column="1" Text="{Binding TestBarcodeInput}"
+                       Placeholder="Enter barcode" FontSize="14"
+                       ReturnCommand="{Binding TestScanCommand}" ReturnType="Go" />
+                <Button Grid.Column="2" Text="Scan" Command="{Binding TestScanCommand}"
+                        BackgroundColor="{StaticResource Primary}" TextColor="White"
+                        FontSize="13" CornerRadius="20" HeightRequest="36" Padding="16,0" />
+            </Grid>
+        </Border>
+    </Grid>
+</ContentPage>
