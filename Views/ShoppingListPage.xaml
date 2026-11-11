@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:SocketMobileGroceryScanner.ViewModels"
              xmlns:m="clr-namespace:SocketMobileGroceryScanner.Models"
+             xmlns:res="clr-namespace:SocketMobileGroceryScanner.Resources.Strings"
              x:Class="SocketMobileGroceryScanner.Views.ShoppingListPage"
              x:Name="Root"
              x:DataType="vm:ShoppingListViewModel"
@@ -22,7 +23,7 @@
         </Grid>
 
         <!-- Page title -->
-        <Label Grid.Row="1" Text="Shopping List" Style="{StaticResource HeadlineLabel}"
+        <Label Grid.Row="1" Text="{x:Static res:AppResources.Shopping_Title}" Style="{StaticResource HeadlineLabel}"
                Padding="20,14,20,6" />
 
         <!-- List -->
@@ -30,14 +31,14 @@
             <VerticalStackLayout Padding="12,0" Spacing="0">
 
                 <!-- Needed section header -->
-                <Label Text="NEEDED" FontSize="12" FontAttributes="Bold"
+                <Label Text="{x:Static res:AppResources.Shopping_Needed}" FontSize="12" FontAttributes="Bold"
                        TextColor="{StaticResource Primary}" Margin="8,8,8,6"
                        IsVisible="{Binding Needed.Count, Converter={StaticResource IntToBoolConverter}}" />
 
                 <CollectionView ItemsSource="{Binding Needed}" SelectionMode="None"
                                 ItemSizingStrategy="MeasureFirstItem">
                     <CollectionView.EmptyView>
-                        <Label Text="Your list is empty — scan items to add them! 🛒"
+                        <Label Text="{x:Static res:AppResources.Shopping_Empty}"
                                Style="{StaticResource MutedLabel}" Margin="8,20"
                                HorizontalOptions="Center" />
                     </CollectionView.EmptyView>
@@ -53,6 +54,8 @@
                                         <Label Text="{Binding Product.DisplayName}" Style="{StaticResource BodyLabel}"
                                                FontAttributes="Bold" LineBreakMode="TailTruncation" />
                                         <Label Text="{Binding Product.Brand}" Style="{StaticResource MutedLabel}" />
+                                        <Label Text="{Binding Product.ScannedBarcode}" Style="{StaticResource MutedLabel}"
+                                               FontSize="11" IsVisible="{Binding Product.HasScannedBarcode}" />
                                     </VerticalStackLayout>
                                     <VerticalStackLayout Grid.Column="2" VerticalOptions="Center"
                                                          HorizontalOptions="End" Spacing="4">
@@ -74,7 +77,7 @@
                 </CollectionView>
 
                 <!-- Done section -->
-                <Label Text="DONE ✓" FontSize="12" FontAttributes="Bold"
+                <Label Text="{x:Static res:AppResources.Shopping_Done}" FontSize="12" FontAttributes="Bold"
                        TextColor="{StaticResource Found}" Margin="8,16,8,6"
                        IsVisible="{Binding Found.Count, Converter={StaticResource IntToBoolConverter}}" />
 
@@ -95,6 +98,8 @@
                                                FontAttributes="Bold" TextDecorations="Strikethrough"
                                                TextColor="{StaticResource Muted}" LineBreakMode="TailTruncation" />
                                         <Label Text="{Binding Product.Brand}" Style="{StaticResource MutedLabel}" />
+                                        <Label Text="{Binding Product.ScannedBarcode}" Style="{StaticResource MutedLabel}"
+                                               FontSize="11" IsVisible="{Binding Product.HasScannedBarcode}" />
                                     </VerticalStackLayout>
                                     <Label Grid.Column="2" Text="✓" FontSize="24"
                                            TextColor="{StaticResource Found}" VerticalOptions="Center" />
@@ -115,7 +120,7 @@
                     Command="{Binding AutoSyncCommand}"
                     IsEnabled="{Binding CanSync}"
                     Style="{StaticResource PrimaryButton}" />
-            <Button Grid.Column="1" Text="Clear Done"
+            <Button Grid.Column="1" Text="{x:Static res:AppResources.Shopping_ClearDone}"
                     Command="{Binding ClearFoundCommand}"
                     Style="{StaticResource SecondaryButton}"
                     IsEnabled="{Binding Found.Count, Converter={StaticResource IntToBoolConverter}}" />
@@ -134,9 +139,9 @@
                 <Label Grid.Column="0" Text="🖥 Test:" VerticalOptions="Center"
                        FontSize="14" TextColor="{StaticResource Muted}" />
                 <Entry Grid.Column="1" Text="{Binding TestBarcodeInput}"
-                       Placeholder="Enter barcode" FontSize="14"
+                       Placeholder="{x:Static res:AppResources.Common_EnterBarcode}" FontSize="14"
                        ReturnCommand="{Binding TestScanCommand}" ReturnType="Go" />
-                <Button Grid.Column="2" Text="Scan" Command="{Binding TestScanCommand}"
+                <Button Grid.Column="2" Text="{x:Static res:AppResources.Common_Scan}" Command="{Binding TestScanCommand}"
                         BackgroundColor="{StaticResource Primary}" TextColor="White"
                         FontSize="13" CornerRadius="20" HeightRequest="36" Padding="16,0" />
             </Grid>

@@ -17,7 +17,7 @@ public partial class ShoppingListPage : ContentPage
         catch (Exception ex)
         {
             System.Diagnostics.Debug.WriteLine($"[ShoppingListPage] Init failed: {ex}");
-            Content = new Label { Text = $"Page error: {ex.Message}", Padding = 20 };
+            Content = new Label { Text = string.Format(global::SocketMobileGroceryScanner.Resources.Strings.AppResources.Common_PageError, ex.Message), Padding = 20 };
         }
     }
 

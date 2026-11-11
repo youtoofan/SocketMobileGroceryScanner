@@ -1,4 +1,5 @@
 using System.Globalization;
+using SocketMobileGroceryScanner.Resources.Strings;
 using SocketMobileGroceryScanner.Services;
 
 namespace SocketMobileGroceryScanner.Converters;
@@ -6,7 +7,7 @@ namespace SocketMobileGroceryScanner.Converters;
 public class BoolToScanModeTextConverter : IValueConverter
 {
     public object Convert(object? value, Type targetType, object? parameter, CultureInfo culture) =>
-        value is true ? "Scan: ON" : "Scan: OFF";
+        value is true ? AppResources.ScanMode_On : AppResources.ScanMode_Off;
     public object ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture) =>
         throw new NotImplementedException();
 }
@@ -54,7 +55,7 @@ public class IntToInverseBoolConverter : IValueConverter
 public class BoolToSyncTextConverter : IValueConverter
 {
     public object Convert(object? value, Type targetType, object? parameter, CultureInfo culture) =>
-        value is true ? "Syncing…" : "Sync to Microsoft To Do";
+        value is true ? AppResources.Sync_Syncing : AppResources.Sync_Button;
     public object ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture) =>
         throw new NotImplementedException();
 }
@@ -78,7 +79,7 @@ public class ScannerStatusToColorConverter : IValueConverter
 public class BoolToTranslateTextConverter : IValueConverter
 {
     public object Convert(object? value, Type targetType, object? parameter, CultureInfo culture) =>
-        value is true ? "Translating…" : "Translate";
+        value is true ? AppResources.Settings_Translating : AppResources.Settings_Translate;
     public object ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture) =>
         throw new NotImplementedException();
 }
@@ -86,7 +87,7 @@ public class BoolToTranslateTextConverter : IValueConverter
 public class BoolToFetchImagesTextConverter : IValueConverter
 {
     public object Convert(object? value, Type targetType, object? parameter, CultureInfo culture) =>
-        value is true ? "Searching…" : "Find Images";
+        value is true ? AppResources.Settings_Searching : AppResources.Settings_FindImages;
     public object ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture) =>
         throw new NotImplementedException();
 }

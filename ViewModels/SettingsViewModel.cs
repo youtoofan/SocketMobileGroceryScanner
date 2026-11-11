@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using SocketMobileGroceryScanner.Data;
 using SocketMobileGroceryScanner.Models;
+using SocketMobileGroceryScanner.Resources.Strings;
 using SocketMobileGroceryScanner.Services;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,7 +18,7 @@ public partial class SettingsViewModel : BaseViewModel
     private bool _suppressListSelectionHandling;
 
     [ObservableProperty] private ScannerStatus _scannerStatus = ScannerStatus.Disconnected;
-    [ObservableProperty] private string _scannerName = "Not connected";
+    [ObservableProperty] private string _scannerName = AppResources.Settings_NotConnected;
     [ObservableProperty] private bool _isToDoSignedIn;
     [ObservableProperty] private string _toDoUserName = string.Empty;
     [ObservableProperty] private string _cacheInfo = string.Empty;
@@ -42,16 +43,16 @@ public partial class SettingsViewModel : BaseViewModel
         _toDo = toDo;
         _dbFactory = dbFactory;
         _productLookup = productLookup;
-        Title = "Settings";
+        Title = AppResources.Settings_Title;
 
         _scanner.StatusChanged += (_, s) =>
         {
             ScannerStatus = s;
-            ScannerName = s == ScannerStatus.Connected ? _scanner.ScannerName : "Not connected";
+            ScannerName = s == ScannerStatus.Connected ? _scanner.ScannerName : AppResources.Settings_NotConnected;
         };
 
         ScannerStatus = _scanner.Status;
-        ScannerName = _scanner.Status == ScannerStatus.Connected ? _scanner.ScannerName : "Not connected";
+        ScannerName = _scanner.Status == ScannerStatus.Connected ? _scanner.ScannerName : AppResources.Settings_NotConnected;
         IsToDoSignedIn = _toDo.IsSignedIn;
         ToDoUserName = _toDo.UserDisplayName ?? string.Empty;
     }
@@ -75,7 +76,7 @@ public partial class SettingsViewModel : BaseViewModel
     private async Task CreateDefaultListAsync()
     {
         if (!IsToDoSignedIn) return;
-        var created = await _toDo.CreateListAsync("Groceries");
+        var created = await _toDo.CreateListAsync(AppResources.Settings_DefaultListName);
         await LoadToDoListsAsync();
 
         _suppressListSelectionHandling = true;
@@ -95,7 +96,7 @@ public partial class SettingsViewModel : BaseViewModel
 
         await using var db = await _dbFactory.CreateDbContextAsync();
         var count = await db.Products.CountAsync();
-        CacheInfo = $"{count} products cached";
+        CacheInfo = string.Format(AppResources.Settings_ProductsCached, count);
 
         if (IsToDoSignedIn)
             await LoadToDoListsAsync();
@@ -107,7 +108,7 @@ public partial class SettingsViewModel : BaseViewModel
         await using var db = await _dbFactory.CreateDbContextAsync();
         db.Products.RemoveRange(db.Products);
         await db.SaveChangesAsync();
-        CacheInfo = "Cache cleared";
+        CacheInfo = AppResources.Settings_CacheCleared;
     }
 
     [RelayCommand]
@@ -118,11 +119,13 @@ public partial class SettingsViewModel : BaseViewModel
         try
         {
             var count = await _productLookup.RetranslateCachedProductNamesAsync();
-            CacheInfo = count > 0 ? $"Translated {count} product name(s)" : "No product names needed translation";
+            CacheInfo = count > 0
+                ? string.Format(AppResources.Settings_Translated, count)
+                : AppResources.Settings_NothingToTranslate;
         }
         catch (Exception ex)
         {
-            CacheInfo = "Translation failed — try again later";
+            CacheInfo = AppResources.Settings_TranslationFailed;
             System.Diagnostics.Debug.WriteLine($"[Settings] Retranslate failed: {ex.Message}");
         }
         finally { IsTranslating = false; }
@@ -136,11 +139,13 @@ public partial class SettingsViewModel : BaseViewModel
         try
         {
             var count = await _productLookup.FetchMissingImagesAsync();
-            CacheInfo = count > 0 ? $"Found images for {count} product(s)" : "No products were missing an image";
+            CacheInfo = count > 0
+                ? string.Format(AppResources.Settings_ImagesFound, count)
+                : AppResources.Settings_NoMissingImages;
         }
         catch (Exception ex)
         {
-            CacheInfo = "Image lookup failed — try again later";
+            CacheInfo = AppResources.Settings_ImagesFailed;
             System.Diagnostics.Debug.WriteLine($"[Settings] FetchMissingImages failed: {ex.Message}");
         }
         finally { IsFetchingImages = false; }

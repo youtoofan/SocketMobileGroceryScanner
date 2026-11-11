@@ -2,6 +2,7 @@ using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using SocketMobileGroceryScanner.Models;
+using SocketMobileGroceryScanner.Resources.Strings;
 using SocketMobileGroceryScanner.Services;
 
 namespace SocketMobileGroceryScanner.ViewModels;
@@ -40,7 +41,7 @@ public partial class ShoppingListViewModel : BaseViewModel
         _inventory    = inventory;
         _toDo         = toDo;
         _scanner      = scanner;
-        Title = "Shopping List";
+        Title = AppResources.Shopping_Title;
 
         _scanner.StatusChanged += OnScannerStatusChanged;
 
@@ -185,9 +186,9 @@ public partial class ShoppingListViewModel : BaseViewModel
 
     private async Task HandleBarcodeAsync(string barcode)
     {
-        LastScanMessage = $"Scanning {barcode}…";
+        LastScanMessage = string.Format(AppResources.Scan_Scanning, barcode);
         var result = await _shoppingList.AddOrIncrementNeededAsync(barcode);
-        if (result == null) { LastScanMessage = $"Product not found: {barcode}"; return; }
+        if (result == null) { LastScanMessage = string.Format(AppResources.Scan_NotFound, barcode); return; }
 
         var existingNeeded = Needed.FirstOrDefault(i => i.Id == result.Id);
         if (existingNeeded != null) { var idx = Needed.IndexOf(existingNeeded); Needed[idx] = result; }
@@ -197,7 +198,7 @@ public partial class ShoppingListViewModel : BaseViewModel
             if (existingFound != null) Found.Remove(existingFound);
             Needed.Insert(0, result);
         }
-        LastScanMessage = $"📋 {result.Product.DisplayName} — need {result.NeededQty}";
+        LastScanMessage = string.Format(AppResources.Shopping_Added, result.Product.DisplayName, result.NeededQty);
         _ = _inventory.DecrementByBarcodeAsync(barcode);
         _ = AutoSyncAsync();
     }

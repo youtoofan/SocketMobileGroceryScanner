@@ -1,3 +1,4 @@
+using System.Globalization;
 using CommunityToolkit.Maui;
 using SocketMobileGroceryScanner.Data;
 using SocketMobileGroceryScanner.Services;
@@ -12,6 +13,13 @@ public static class MauiProgram
 {
     public static MauiApp CreateMauiApp()
     {
+        // The app is always Dutch (Belgium), regardless of the device language.
+        var culture = new CultureInfo("nl-BE");
+        CultureInfo.DefaultThreadCurrentCulture = culture;
+        CultureInfo.DefaultThreadCurrentUICulture = culture;
+        CultureInfo.CurrentCulture = culture;
+        CultureInfo.CurrentUICulture = culture;
+
         var builder = MauiApp.CreateBuilder();
 
         builder

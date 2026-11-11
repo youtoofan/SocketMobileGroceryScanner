@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- English translations. Keep keys in sync with AppResources.resx (Dutch default). -->
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <data name="Tab_Inventory" xml:space="preserve"><value>Inventory</value></data>
+  <data name="Tab_Shopping" xml:space="preserve"><value>Shopping</value></data>
+  <data name="Tab_Settings" xml:space="preserve"><value>Settings</value></data>
+  <data name="Common_Back" xml:space="preserve"><value>‹ Back</value></data>
+  <data name="Common_EnterBarcode" xml:space="preserve"><value>Enter barcode</value></data>
+  <data name="Common_Scan" xml:space="preserve"><value>Scan</value></data>
+  <data name="Common_PageError" xml:space="preserve"><value>Page error: {0}</value></data>
+  <data name="Common_Ok" xml:space="preserve"><value>OK</value></data>
+  <data name="Crash_Title" xml:space="preserve"><value>Previous Crash</value></data>
+  <data name="Scan_Scanning" xml:space="preserve"><value>Scanning {0}…</value></data>
+  <data name="Scan_NotFound" xml:space="preserve"><value>Product not found: {0}</value></data>
+  <data name="ScanMode_On" xml:space="preserve"><value>Scan: ON</value></data>
+  <data name="ScanMode_Off" xml:space="preserve"><value>Scan: OFF</value></data>
+  <data name="Product_Unknown" xml:space="preserve"><value>Unknown product</value></data>
+  <data name="Inventory_Title" xml:space="preserve"><value>Inventory</value></data>
+  <data name="Inventory_Added" xml:space="preserve"><value>✓ {0} — qty {1}</value></data>
+  <data name="Inventory_EmptyTitle" xml:space="preserve"><value>No items yet</value></data>
+  <data name="Inventory_EmptyHint" xml:space="preserve"><value>Scan barcodes to build your inventory</value></data>
+  <data name="Shopping_Title" xml:space="preserve"><value>Shopping List</value></data>
+  <data name="Shopping_Added" xml:space="preserve"><value>📋 {0} — need {1}</value></data>
+  <data name="Shopping_Needed" xml:space="preserve"><value>NEEDED</value></data>
+  <data name="Shopping_Done" xml:space="preserve"><value>DONE ✓</value></data>
+  <data name="Shopping_Empty" xml:space="preserve"><value>Your list is empty — scan items to add them! 🛒</value></data>
+  <data name="Shopping_ClearDone" xml:space="preserve"><value>Clear Done</value></data>
+  <data name="Sync_Button" xml:space="preserve"><value>Sync to Microsoft To Do</value></data>
+  <data name="Sync_Syncing" xml:space="preserve"><value>Syncing…</value></data>
+  <data name="Settings_Title" xml:space="preserve"><value>Settings</value></data>
+  <data name="Settings_ScannerSection" xml:space="preserve"><value>SCANNER</value></data>
+  <data name="Settings_ScannerConnection" xml:space="preserve"><value>Scanner Connection</value></data>
+  <data name="Settings_NotConnected" xml:space="preserve"><value>Not connected</value></data>
+  <data name="Settings_ToDoSection" xml:space="preserve"><value>MICROSOFT TO DO</value></data>
+  <data name="Settings_SignedInAs" xml:space="preserve"><value>Signed in as</value></data>
+  <data name="Settings_SignOut" xml:space="preserve"><value>Sign Out</value></data>
+  <data name="Settings_SyncedList" xml:space="preserve"><value>Synced list</value></data>
+  <data name="Settings_NoLists" xml:space="preserve"><value>No lists found in Microsoft To Do</value></data>
+  <data name="Settings_NewList" xml:space="preserve"><value>New List</value></data>
+  <data name="Settings_DefaultListName" xml:space="preserve"><value>Groceries</value></data>
+  <data name="Settings_ConnectAccount" xml:space="preserve"><value>Connect your account to sync shopping lists</value></data>
+  <data name="Settings_SignIn" xml:space="preserve"><value>Sign In</value></data>
+  <data name="Settings_DataSection" xml:space="preserve"><value>DATA</value></data>
+  <data name="Settings_ProductCache" xml:space="preserve"><value>Product Cache</value></data>
+  <data name="Settings_Clear" xml:space="preserve"><value>Clear</value></data>
+  <data name="Settings_NonDutchNames" xml:space="preserve"><value>Non-Dutch Product Names</value></data>
+  <data name="Settings_NonDutchNamesHint" xml:space="preserve"><value>Translate names fetched in French/German/etc. to Dutch</value></data>
+  <data name="Settings_Translate" xml:space="preserve"><value>Translate</value></data>
+  <data name="Settings_Translating" xml:space="preserve"><value>Translating…</value></data>
+  <data name="Settings_MissingImages" xml:space="preserve"><value>Missing Product Images</value></data>
+  <data name="Settings_MissingImagesHint" xml:space="preserve"><value>Find free fallback photos for items without one</value></data>
+  <data name="Settings_FindImages" xml:space="preserve"><value>Find Images</value></data>
+  <data name="Settings_Searching" xml:space="preserve"><value>Searching…</value></data>
+  <data name="Settings_Version" xml:space="preserve"><value>Grocery Scanner v1.0</value></data>
+  <data name="Settings_ProductsCached" xml:space="preserve"><value>{0} products cached</value></data>
+  <data name="Settings_CacheCleared" xml:space="preserve"><value>Cache cleared</value></data>
+  <data name="Settings_Translated" xml:space="preserve"><value>Translated {0} product name(s)</value></data>
+  <data name="Settings_NothingToTranslate" xml:space="preserve"><value>No product names needed translation</value></data>
+  <data name="Settings_TranslationFailed" xml:space="preserve"><value>Translation failed — try again later</value></data>
+  <data name="Settings_ImagesFound" xml:space="preserve"><value>Found images for {0} product(s)</value></data>
+  <data name="Settings_NoMissingImages" xml:space="preserve"><value>No products were missing an image</value></data>
+  <data name="Settings_ImagesFailed" xml:space="preserve"><value>Image lookup failed — try again later</value></data>
+  <data name="Scanner_Title" xml:space="preserve"><value>Scanner Status</value></data>
+  <data name="Scanner_Initializing" xml:space="preserve"><value>Initializing…</value></data>
+  <data name="Scanner_ConnectedTo" xml:space="preserve"><value>Connected to {0}</value></data>
+  <data name="Scanner_Connecting" xml:space="preserve"><value>Connecting to Companion service…</value></data>
+  <data name="Scanner_NoScanner" xml:space="preserve"><value>No scanner connected</value></data>
+  <data name="Scanner_InitFailed" xml:space="preserve"><value>SDK initialization failed: {0}</value></data>
+  <data name="Scanner_CompanionOpenFailed" xml:space="preserve"><value>Could not open Companion: {0}</value></data>
+  <data name="Scanner_OpenCompanion" xml:space="preserve"><value>Open Companion App</value></data>
+  <data name="Scanner_ConnectedScanners" xml:space="preserve"><value>Connected Scanners:</value></data>
+  <data name="Scanner_TestScan" xml:space="preserve"><value>🔍 Test Scan</value></data>
+  <data name="Scanner_TestScanHint" xml:space="preserve"><value>Scan any barcode to verify the connection</value></data>
+  <data name="Scanner_BarcodeReceived" xml:space="preserve"><value>✓ Barcode received!</value></data>
+  <data name="Scanner_Waiting" xml:space="preserve"><value>Waiting for scan…</value></data>
+  <data name="Scanner_NoScannerTitle" xml:space="preserve"><value>📡 No Scanner Connected</value></data>
+  <data name="Scanner_NoScannerHint" xml:space="preserve"><value>Use the Socket Mobile Companion app to pair and connect your barcode scanner.</value></data>
+  <data name="Scanner_SetupSteps" xml:space="preserve"><value>Setup Steps:</value></data>
+  <data name="Scanner_Step1" xml:space="preserve"><value>1. Install Socket Mobile Companion app</value></data>
+  <data name="Scanner_Step2" xml:space="preserve"><value>2. Set scanner to Application Mode (SPP)</value></data>
+  <data name="Scanner_Step3" xml:space="preserve"><value>3. Pair scanner via Companion app</value></data>
+  <data name="Scanner_Step4" xml:space="preserve"><value>4. Scanner will appear here automatically</value></data>
+  <data name="Scanner_Retry" xml:space="preserve"><value>⟳ Retry Connection</value></data>
+</root>

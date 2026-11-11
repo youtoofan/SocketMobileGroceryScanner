@@ -2,6 +2,7 @@ using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using SocketMobileGroceryScanner.Models;
+using SocketMobileGroceryScanner.Resources.Strings;
 using SocketMobileGroceryScanner.Services;
 
 namespace SocketMobileGroceryScanner.ViewModels;
@@ -22,7 +23,7 @@ public partial class InventoryViewModel : BaseViewModel
     {
         _inventory = inventory;
         _scanner = scanner;
-        Title = "Inventory";
+        Title = AppResources.Inventory_Title;
 
         _scanner.StatusChanged += OnScannerStatusChanged;
         ScannerStatus = _scanner.Status;
@@ -41,13 +42,13 @@ public partial class InventoryViewModel : BaseViewModel
     private async void OnBarcodeScanned(object? sender, string barcode)
     {
         if (!ScanModeActive) return;
-        LastScanMessage = $"Scanning {barcode}…";
+        LastScanMessage = string.Format(AppResources.Scan_Scanning, barcode);
         var item = await _inventory.AddOrIncrementAsync(barcode);
-        if (item == null) { LastScanMessage = $"Product not found: {barcode}"; return; }
+        if (item == null) { LastScanMessage = string.Format(AppResources.Scan_NotFound, barcode); return; }
         var existing = Items.FirstOrDefault(i => i.Id == item.Id);
         if (existing != null) { var idx = Items.IndexOf(existing); Items[idx] = item; }
         else Items.Insert(0, item);
-        LastScanMessage = $"✓ {item.Product.DisplayName} — qty {item.Quantity}";
+        LastScanMessage = string.Format(AppResources.Inventory_Added, item.Product.DisplayName, item.Quantity);
     }
 
     [RelayCommand]

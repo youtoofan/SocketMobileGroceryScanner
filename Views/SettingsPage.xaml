@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:SocketMobileGroceryScanner.ViewModels"
+             xmlns:res="clr-namespace:SocketMobileGroceryScanner.Resources.Strings"
              x:Class="SocketMobileGroceryScanner.Views.SettingsPage"
              x:DataType="vm:SettingsViewModel"
              Shell.NavBarIsVisible="False">
@@ -11,7 +12,7 @@
         <!-- Dark header with profile-style info -->
         <VerticalStackLayout Grid.Row="0" BackgroundColor="{StaticResource HeaderBg}"
                              Padding="24,20" Spacing="8">
-            <Label Text="Settings" FontSize="24" FontAttributes="Bold" TextColor="White" />
+            <Label Text="{x:Static res:AppResources.Settings_Title}" FontSize="24" FontAttributes="Bold" TextColor="White" />
             <Label Text="{Binding ScannerName}" TextColor="#D4A0B0" FontSize="14" />
         </VerticalStackLayout>
 
@@ -21,7 +22,7 @@
                 <!-- Scanner section -->
                 <Border Style="{StaticResource Card}" Padding="0">
                     <VerticalStackLayout>
-                        <Label Text="SCANNER" Style="{StaticResource MutedLabel}"
+                        <Label Text="{x:Static res:AppResources.Settings_ScannerSection}" Style="{StaticResource MutedLabel}"
                                Margin="16,14,16,4" FontAttributes="Bold" />
                         <Grid Style="{StaticResource SettingsRow}">
                             <Grid.GestureRecognizers>
@@ -29,7 +30,7 @@
                             </Grid.GestureRecognizers>
                             <Label Grid.Column="0" Text="📡" FontSize="20" VerticalOptions="Center" />
                             <VerticalStackLayout Grid.Column="1" VerticalOptions="Center">
-                                <Label Text="Scanner Connection" Style="{StaticResource BodyLabel}" />
+                                <Label Text="{x:Static res:AppResources.Settings_ScannerConnection}" Style="{StaticResource BodyLabel}" />
                                 <Label Text="{Binding ScannerName}" Style="{StaticResource MutedLabel}" />
                             </VerticalStackLayout>
                             <Grid Grid.Column="2" ColumnDefinitions="Auto,Auto" ColumnSpacing="8"
@@ -47,7 +48,7 @@
                 <!-- Microsoft To Do section -->
                 <Border Style="{StaticResource Card}" Padding="0">
                     <VerticalStackLayout>
-                        <Label Text="MICROSOFT TO DO" Style="{StaticResource MutedLabel}"
+                        <Label Text="{x:Static res:AppResources.Settings_ToDoSection}" Style="{StaticResource MutedLabel}"
                                Margin="16,14,16,4" FontAttributes="Bold" />
 
                         <!-- Signed-in state -->
@@ -55,11 +56,11 @@
                               IsVisible="{Binding IsToDoSignedIn}">
                             <Label Grid.Column="0" Text="👤" FontSize="20" VerticalOptions="Center" />
                             <VerticalStackLayout Grid.Column="1" VerticalOptions="Center">
-                                <Label Text="Signed in as" Style="{StaticResource MutedLabel}" />
+                                <Label Text="{x:Static res:AppResources.Settings_SignedInAs}" Style="{StaticResource MutedLabel}" />
                                 <Label Text="{Binding ToDoUserName}" Style="{StaticResource BodyLabel}"
                                        FontAttributes="Bold" />
                             </VerticalStackLayout>
-                            <Button Grid.Column="2" Text="Sign Out"
+                            <Button Grid.Column="2" Text="{x:Static res:AppResources.Settings_SignOut}"
                                     Command="{Binding SignOutToDoCommand}"
                                     Style="{StaticResource SecondaryButton}"
                                     HeightRequest="36" Padding="16,0" FontSize="13" />
@@ -71,17 +72,17 @@
                               ColumnDefinitions="36,*,Auto">
                             <Label Grid.Column="0" Text="📋" FontSize="20" VerticalOptions="Center" />
                             <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="2">
-                                <Label Text="Synced list" Style="{StaticResource MutedLabel}" />
+                                <Label Text="{x:Static res:AppResources.Settings_SyncedList}" Style="{StaticResource MutedLabel}" />
                                 <Picker ItemsSource="{Binding AvailableLists}"
                                         ItemDisplayBinding="{Binding Name}"
                                         SelectedItem="{Binding SelectedList}"
                                         FontSize="14"
                                         IsVisible="{Binding AvailableLists.Count, Converter={StaticResource IntToBoolConverter}}" />
-                                <Label Text="No lists found in Microsoft To Do"
+                                <Label Text="{x:Static res:AppResources.Settings_NoLists}"
                                        Style="{StaticResource MutedLabel}"
                                        IsVisible="{Binding AvailableLists.Count, Converter={StaticResource IntToInverseBoolConverter}}" />
                             </VerticalStackLayout>
-                            <Button Grid.Column="2" Text="New List"
+                            <Button Grid.Column="2" Text="{x:Static res:AppResources.Settings_NewList}"
                                     Command="{Binding CreateDefaultListCommand}"
                                     Style="{StaticResource SecondaryButton}"
                                     HeightRequest="36" Padding="12,0" FontSize="12" />
@@ -91,9 +92,9 @@
                         <Grid Style="{StaticResource SettingsRow}"
                               IsVisible="{Binding IsToDoSignedIn, Converter={StaticResource InverseBoolConverter}}">
                             <Label Grid.Column="0" Text="🔑" FontSize="20" VerticalOptions="Center" />
-                            <Label Grid.Column="1" Text="Connect your account to sync shopping lists"
+                            <Label Grid.Column="1" Text="{x:Static res:AppResources.Settings_ConnectAccount}"
                                    Style="{StaticResource BodyLabel}" VerticalOptions="Center" />
-                            <Button Grid.Column="2" Text="Sign In"
+                            <Button Grid.Column="2" Text="{x:Static res:AppResources.Settings_SignIn}"
                                     Command="{Binding SignInToDoCommand}"
                                     Style="{StaticResource PrimaryButton}"
                                     HeightRequest="36" Padding="16,0" FontSize="13" />
@@ -104,16 +105,16 @@
                 <!-- Data section -->
                 <Border Style="{StaticResource Card}" Padding="0">
                     <VerticalStackLayout>
-                        <Label Text="DATA" Style="{StaticResource MutedLabel}"
+                        <Label Text="{x:Static res:AppResources.Settings_DataSection}" Style="{StaticResource MutedLabel}"
                                Margin="16,14,16,4" FontAttributes="Bold" />
 
                         <Grid Style="{StaticResource SettingsRow}">
                             <Label Grid.Column="0" Text="💾" FontSize="20" VerticalOptions="Center" />
                             <VerticalStackLayout Grid.Column="1" VerticalOptions="Center">
-                                <Label Text="Product Cache" Style="{StaticResource BodyLabel}" />
+                                <Label Text="{x:Static res:AppResources.Settings_ProductCache}" Style="{StaticResource BodyLabel}" />
                                 <Label Text="{Binding CacheInfo}" Style="{StaticResource MutedLabel}" />
                             </VerticalStackLayout>
-                            <Button Grid.Column="2" Text="Clear"
+                            <Button Grid.Column="2" Text="{x:Static res:AppResources.Settings_Clear}"
                                     Command="{Binding ClearCacheCommand}"
                                     BackgroundColor="{StaticResource SurfaceVariant}"
                                     TextColor="{StaticResource Danger}"
@@ -124,8 +125,8 @@
                         <Grid Style="{StaticResource SettingsRow}">
                             <Label Grid.Column="0" Text="🌐" FontSize="20" VerticalOptions="Center" />
                             <VerticalStackLayout Grid.Column="1" VerticalOptions="Center">
-                                <Label Text="Non-Dutch Product Names" Style="{StaticResource BodyLabel}" />
-                                <Label Text="Translate names fetched in French/German/etc. to Dutch"
+                                <Label Text="{x:Static res:AppResources.Settings_NonDutchNames}" Style="{StaticResource BodyLabel}" />
+                                <Label Text="{x:Static res:AppResources.Settings_NonDutchNamesHint}"
                                        Style="{StaticResource MutedLabel}" />
                             </VerticalStackLayout>
                             <Button Grid.Column="2"
@@ -139,8 +140,8 @@
                         <Grid Style="{StaticResource SettingsRow}">
                             <Label Grid.Column="0" Text="🖼" FontSize="20" VerticalOptions="Center" />
                             <VerticalStackLayout Grid.Column="1" VerticalOptions="Center">
-                                <Label Text="Missing Product Images" Style="{StaticResource BodyLabel}" />
-                                <Label Text="Find free fallback photos for items without one"
+                                <Label Text="{x:Static res:AppResources.Settings_MissingImages}" Style="{StaticResource BodyLabel}" />
+                                <Label Text="{x:Static res:AppResources.Settings_MissingImagesHint}"
                                        Style="{StaticResource MutedLabel}" />
                             </VerticalStackLayout>
                             <Button Grid.Column="2"
@@ -154,7 +155,7 @@
                 </Border>
 
                 <!-- App info -->
-                <Label Text="Grocery Scanner v1.0" Style="{StaticResource MutedLabel}"
+                <Label Text="{x:Static res:AppResources.Settings_Version}" Style="{StaticResource MutedLabel}"
                        HorizontalOptions="Center" Margin="0,8" />
 
             </VerticalStackLayout>

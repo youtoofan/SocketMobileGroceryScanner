@@ -30,5 +30,16 @@ public class Product
     public string DisplayName =>
         !string.IsNullOrWhiteSpace(Name) ? Name
         : !string.IsNullOrWhiteSpace(Barcode) ? $"Product ({Barcode})"
-        : "Unknown product";
+        : global::SocketMobileGroceryScanner.Resources.Strings.AppResources.Product_Unknown;
+
+    /// <summary>
+    /// The real scanned barcode for display, or null for manually-added items
+    /// (whose Barcode is a synthetic "manual:" key).
+    /// </summary>
+    [NotMapped]
+    public string? ScannedBarcode =>
+        string.IsNullOrWhiteSpace(Barcode) || Barcode.StartsWith("manual:") ? null : Barcode;
+
+    [NotMapped]
+    public bool HasScannedBarcode => ScannedBarcode != null;
 }

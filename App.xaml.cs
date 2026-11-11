@@ -43,7 +43,8 @@ public partial class App : Application
             {
                 Preferences.Remove(CrashPrefKey);
                 if (_shell.CurrentPage != null)
-                    await _shell.CurrentPage.DisplayAlert("Previous Crash", crash, "OK");
+                    await _shell.CurrentPage.DisplayAlert(
+                        global::SocketMobileGroceryScanner.Resources.Strings.AppResources.Crash_Title, crash, global::SocketMobileGroceryScanner.Resources.Strings.AppResources.Common_Ok);
             }
 
             // Auto-connect to last known scanner

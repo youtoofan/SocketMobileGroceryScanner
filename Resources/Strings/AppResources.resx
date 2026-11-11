@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Default (neutral) language: Dutch (nl-BE). Keep keys in sync with AppResources.en.resx. -->
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <data name="Tab_Inventory" xml:space="preserve"><value>Voorraad</value></data>
+  <data name="Tab_Shopping" xml:space="preserve"><value>Boodschappen</value></data>
+  <data name="Tab_Settings" xml:space="preserve"><value>Instellingen</value></data>
+  <data name="Common_Back" xml:space="preserve"><value>‹ Terug</value></data>
+  <data name="Common_EnterBarcode" xml:space="preserve"><value>Barcode invoeren</value></data>
+  <data name="Common_Scan" xml:space="preserve"><value>Scannen</value></data>
+  <data name="Common_PageError" xml:space="preserve"><value>Fout op pagina: {0}</value></data>
+  <data name="Common_Ok" xml:space="preserve"><value>OK</value></data>
+  <data name="Crash_Title" xml:space="preserve"><value>Vorige crash</value></data>
+  <data name="Scan_Scanning" xml:space="preserve"><value>Scannen: {0}…</value></data>
+  <data name="Scan_NotFound" xml:space="preserve"><value>Product niet gevonden: {0}</value></data>
+  <data name="ScanMode_On" xml:space="preserve"><value>Scan: AAN</value></data>
+  <data name="ScanMode_Off" xml:space="preserve"><value>Scan: UIT</value></data>
+  <data name="Product_Unknown" xml:space="preserve"><value>Onbekend product</value></data>
+  <data name="Inventory_Title" xml:space="preserve"><value>Voorraad</value></data>
+  <data name="Inventory_Added" xml:space="preserve"><value>✓ {0} — aantal {1}</value></data>
+  <data name="Inventory_EmptyTitle" xml:space="preserve"><value>Nog geen producten</value></data>
+  <data name="Inventory_EmptyHint" xml:space="preserve"><value>Scan barcodes om je voorraad op te bouwen</value></data>
+  <data name="Shopping_Title" xml:space="preserve"><value>Boodschappenlijst</value></data>
+  <data name="Shopping_Added" xml:space="preserve"><value>📋 {0} — nodig: {1}</value></data>
+  <data name="Shopping_Needed" xml:space="preserve"><value>NODIG</value></data>
+  <data name="Shopping_Done" xml:space="preserve"><value>AFGEVINKT ✓</value></data>
+  <data name="Shopping_Empty" xml:space="preserve"><value>Je lijst is leeg — scan producten om ze toe te voegen! 🛒</value></data>
+  <data name="Shopping_ClearDone" xml:space="preserve"><value>Afgevinkte wissen</value></data>
+  <data name="Sync_Button" xml:space="preserve"><value>Sync met Microsoft To Do</value></data>
+  <data name="Sync_Syncing" xml:space="preserve"><value>Synchroniseren…</value></data>
+  <data name="Settings_Title" xml:space="preserve"><value>Instellingen</value></data>
+  <data name="Settings_ScannerSection" xml:space="preserve"><value>SCANNER</value></data>
+  <data name="Settings_ScannerConnection" xml:space="preserve"><value>Scannerverbinding</value></data>
+  <data name="Settings_NotConnected" xml:space="preserve"><value>Niet verbonden</value></data>
+  <data name="Settings_ToDoSection" xml:space="preserve"><value>MICROSOFT TO DO</value></data>
+  <data name="Settings_SignedInAs" xml:space="preserve"><value>Aangemeld als</value></data>
+  <data name="Settings_SignOut" xml:space="preserve"><value>Afmelden</value></data>
+  <data name="Settings_SyncedList" xml:space="preserve"><value>Gesynchroniseerde lijst</value></data>
+  <data name="Settings_NoLists" xml:space="preserve"><value>Geen lijsten gevonden in Microsoft To Do</value></data>
+  <data name="Settings_NewList" xml:space="preserve"><value>Nieuwe lijst</value></data>
+  <data name="Settings_DefaultListName" xml:space="preserve"><value>Boodschappen</value></data>
+  <data name="Settings_ConnectAccount" xml:space="preserve"><value>Koppel je account om boodschappenlijsten te synchroniseren</value></data>
+  <data name="Settings_SignIn" xml:space="preserve"><value>Aanmelden</value></data>
+  <data name="Settings_DataSection" xml:space="preserve"><value>GEGEVENS</value></data>
+  <data name="Settings_ProductCache" xml:space="preserve"><value>Productcache</value></data>
+  <data name="Settings_Clear" xml:space="preserve"><value>Wissen</value></data>
+  <data name="Settings_NonDutchNames" xml:space="preserve"><value>Niet-Nederlandstalige productnamen</value></data>
+  <data name="Settings_NonDutchNamesHint" xml:space="preserve"><value>Vertaal namen in het Frans, Duits, enz. naar het Nederlands</value></data>
+  <data name="Settings_Translate" xml:space="preserve"><value>Vertalen</value></data>
+  <data name="Settings_Translating" xml:space="preserve"><value>Vertalen…</value></data>
+  <data name="Settings_MissingImages" xml:space="preserve"><value>Ontbrekende productfoto's</value></data>
+  <data name="Settings_MissingImagesHint" xml:space="preserve"><value>Zoek gratis vervangfoto's voor producten zonder foto</value></data>
+  <data name="Settings_FindImages" xml:space="preserve"><value>Foto's zoeken</value></data>
+  <data name="Settings_Searching" xml:space="preserve"><value>Zoeken…</value></data>
+  <data name="Settings_Version" xml:space="preserve"><value>Boodschappenscanner v1.0</value></data>
+  <data name="Settings_ProductsCached" xml:space="preserve"><value>{0} producten in cache</value></data>
+  <data name="Settings_CacheCleared" xml:space="preserve"><value>Cache gewist</value></data>
+  <data name="Settings_Translated" xml:space="preserve"><value>{0} productnaam/-namen vertaald</value></data>
+  <data name="Settings_NothingToTranslate" xml:space="preserve"><value>Geen productnamen om te vertalen</value></data>
+  <data name="Settings_TranslationFailed" xml:space="preserve"><value>Vertalen mislukt — probeer het later opnieuw</value></data>
+  <data name="Settings_ImagesFound" xml:space="preserve"><value>Foto's gevonden voor {0} product(en)</value></data>
+  <data name="Settings_NoMissingImages" xml:space="preserve"><value>Geen producten zonder foto</value></data>
+  <data name="Settings_ImagesFailed" xml:space="preserve"><value>Foto's zoeken mislukt — probeer het later opnieuw</value></data>
+  <data name="Scanner_Title" xml:space="preserve"><value>Scannerstatus</value></data>
+  <data name="Scanner_Initializing" xml:space="preserve"><value>Bezig met opstarten…</value></data>
+  <data name="Scanner_ConnectedTo" xml:space="preserve"><value>Verbonden met {0}</value></data>
+  <data name="Scanner_Connecting" xml:space="preserve"><value>Verbinden met Companion-service…</value></data>
+  <data name="Scanner_NoScanner" xml:space="preserve"><value>Geen scanner verbonden</value></data>
+  <data name="Scanner_InitFailed" xml:space="preserve"><value>SDK opstarten mislukt: {0}</value></data>
+  <data name="Scanner_CompanionOpenFailed" xml:space="preserve"><value>Kan Companion niet openen: {0}</value></data>
+  <data name="Scanner_OpenCompanion" xml:space="preserve"><value>Companion-app openen</value></data>
+  <data name="Scanner_ConnectedScanners" xml:space="preserve"><value>Verbonden scanners:</value></data>
+  <data name="Scanner_TestScan" xml:space="preserve"><value>🔍 Testscan</value></data>
+  <data name="Scanner_TestScanHint" xml:space="preserve"><value>Scan een barcode om de verbinding te testen</value></data>
+  <data name="Scanner_BarcodeReceived" xml:space="preserve"><value>✓ Barcode ontvangen!</value></data>
+  <data name="Scanner_Waiting" xml:space="preserve"><value>Wachten op scan…</value></data>
+  <data name="Scanner_NoScannerTitle" xml:space="preserve"><value>📡 Geen scanner verbonden</value></data>
+  <data name="Scanner_NoScannerHint" xml:space="preserve"><value>Gebruik de Socket Mobile Companion-app om je barcodescanner te koppelen en te verbinden.</value></data>
+  <data name="Scanner_SetupSteps" xml:space="preserve"><value>Installatiestappen:</value></data>
+  <data name="Scanner_Step1" xml:space="preserve"><value>1. Installeer de Socket Mobile Companion-app</value></data>
+  <data name="Scanner_Step2" xml:space="preserve"><value>2. Zet de scanner in Application Mode (SPP)</value></data>
+  <data name="Scanner_Step3" xml:space="preserve"><value>3. Koppel de scanner via de Companion-app</value></data>
+  <data name="Scanner_Step4" xml:space="preserve"><value>4. De scanner verschijnt hier automatisch</value></data>
+  <data name="Scanner_Retry" xml:space="preserve"><value>⟳ Opnieuw verbinden</value></data>
+</root>

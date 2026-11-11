@@ -1,6 +1,7 @@
 using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using SocketMobileGroceryScanner.Resources.Strings;
 using SocketMobileGroceryScanner.Services;
 
 namespace SocketMobileGroceryScanner.ViewModels;
@@ -12,7 +13,7 @@ public partial class ScannerConnectViewModel : BaseViewModel
     [ObservableProperty] private ObservableCollection<BluetoothDeviceInfo> _devices = [];
     [ObservableProperty] private bool _isConnected;
     [ObservableProperty] private bool _isConnecting;
-    [ObservableProperty] private string _connectionStatusText = "Initializing…";
+    [ObservableProperty] private string _connectionStatusText = AppResources.Scanner_Initializing;
     [ObservableProperty] private string _errorMessage = string.Empty;
     [ObservableProperty] private bool _hasError;
     [ObservableProperty] private string _testBarcode = string.Empty;
@@ -31,7 +32,7 @@ public partial class ScannerConnectViewModel : BaseViewModel
     public ScannerConnectViewModel(IScannerService scanner)
     {
         _scanner = scanner;
-        Title = "Scanner Status";
+        Title = AppResources.Scanner_Title;
 
         UpdateConnectionState(_scanner.Status);
 
@@ -52,9 +53,9 @@ public partial class ScannerConnectViewModel : BaseViewModel
         IsConnecting = status == ScannerStatus.Connecting;
         ConnectionStatusText = status switch
         {
-            ScannerStatus.Connected => $"Connected to {_scanner.ScannerName}",
-            ScannerStatus.Connecting => "Connecting to Companion service…",
-            _ => "No scanner connected"
+            ScannerStatus.Connected => string.Format(AppResources.Scanner_ConnectedTo, _scanner.ScannerName),
+            ScannerStatus.Connecting => AppResources.Scanner_Connecting,
+            _ => AppResources.Scanner_NoScanner
         };
         ErrorMessage = _scanner.LastError;
         RefreshDeviceList();
@@ -74,7 +75,7 @@ public partial class ScannerConnectViewModel : BaseViewModel
         }
         catch (Exception ex)
         {
-            ErrorMessage = $"SDK initialization failed: {ex.Message}";
+            ErrorMessage = string.Format(AppResources.Scanner_InitFailed, ex.Message);
         }
 
         RefreshDeviceList();
@@ -113,7 +114,7 @@ public partial class ScannerConnectViewModel : BaseViewModel
         }
         catch (Exception ex)
         {
-            ErrorMessage = $"Could not open Companion: {ex.Message}";
+            ErrorMessage = string.Format(AppResources.Scanner_CompanionOpenFailed, ex.Message);
         }
     }
 }
