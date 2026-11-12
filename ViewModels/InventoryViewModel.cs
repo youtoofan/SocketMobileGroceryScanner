@@ -12,12 +12,12 @@ public partial class InventoryViewModel : BaseViewModel
     private readonly IInventoryService _inventory;
     private readonly IScannerService _scanner;
 
-    [ObservableProperty] private ObservableCollection<InventoryItem> _items = [];
-    [ObservableProperty] private bool _scanModeActive;
-    [ObservableProperty] private string _lastScanMessage = string.Empty;
-    [ObservableProperty] private ScannerStatus _scannerStatus = ScannerStatus.Disconnected;
-    [ObservableProperty] private string _scannerName = string.Empty;
-    [ObservableProperty] private string _testBarcodeInput = string.Empty;
+    [ObservableProperty] public partial ObservableCollection<InventoryItem> Items { get; set; } = [];
+    [ObservableProperty] public partial bool ScanModeActive { get; set; }
+    [ObservableProperty] public partial string LastScanMessage { get; set; } = string.Empty;
+    [ObservableProperty] public partial ScannerStatus ScannerStatus { get; set; } = ScannerStatus.Disconnected;
+    [ObservableProperty] public partial string ScannerName { get; set; } = string.Empty;
+    [ObservableProperty] public partial string TestBarcodeInput { get; set; } = string.Empty;
 
     public InventoryViewModel(IInventoryService inventory, IScannerService scanner)
     {

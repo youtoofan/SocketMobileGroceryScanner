@@ -16,15 +16,15 @@ public partial class ShoppingListViewModel : BaseViewModel
     private CancellationTokenSource? _pollCts;
     private readonly SemaphoreSlim _syncLock = new(1, 1);
 
-    [ObservableProperty] private ObservableCollection<ShoppingListItem> _needed = [];
-    [ObservableProperty] private ObservableCollection<ShoppingListItem> _found = [];
-    [ObservableProperty] private ScannerStatus _scannerStatus = ScannerStatus.Disconnected;
-    [ObservableProperty] private string _scannerName = string.Empty;
-    [ObservableProperty] private string _lastScanMessage = string.Empty;
-    [ObservableProperty] private bool _isSyncing;
-    [ObservableProperty] private bool _isToDoSignedIn;
-    [ObservableProperty] private string _toDoUserName = string.Empty;
-    [ObservableProperty] private string _testBarcodeInput = string.Empty;
+    [ObservableProperty] public partial ObservableCollection<ShoppingListItem> Needed { get; set; } = [];
+    [ObservableProperty] public partial ObservableCollection<ShoppingListItem> Found { get; set; } = [];
+    [ObservableProperty] public partial ScannerStatus ScannerStatus { get; set; } = ScannerStatus.Disconnected;
+    [ObservableProperty] public partial string ScannerName { get; set; } = string.Empty;
+    [ObservableProperty] public partial string LastScanMessage { get; set; } = string.Empty;
+    [ObservableProperty] public partial bool IsSyncing { get; set; }
+    [ObservableProperty] public partial bool IsToDoSignedIn { get; set; }
+    [ObservableProperty] public partial string ToDoUserName { get; set; } = string.Empty;
+    [ObservableProperty] public partial string TestBarcodeInput { get; set; } = string.Empty;
 
     public bool CanSync => IsToDoSignedIn && !IsSyncing;
 
@@ -208,7 +208,7 @@ public partial class ShoppingListViewModel : BaseViewModel
     {
         if (!_toDo.IsSignedIn) return;
         if (!_syncLock.Wait(0)) return; // skip if sync already in progress
-        ToDoUserName = _toDo.UserDisplayName;
+        ToDoUserName = _toDo.UserDisplayName ?? string.Empty;
         IsSyncing = true;
         try
         {

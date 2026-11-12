@@ -4,7 +4,7 @@ namespace SocketMobileGroceryScanner.ViewModels;
 
 public partial class BaseViewModel : ObservableObject
 {
-    [ObservableProperty] private bool _isBusy;
+    [ObservableProperty] public partial bool IsBusy { get; set; }
 
-    [ObservableProperty] private string _title = string.Empty;
+    [ObservableProperty] public partial string Title { get; set; } = string.Empty;
 }

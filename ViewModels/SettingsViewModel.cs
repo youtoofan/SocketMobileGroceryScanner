@@ -17,15 +17,15 @@ public partial class SettingsViewModel : BaseViewModel
     private readonly IProductLookupService _productLookup;
     private bool _suppressListSelectionHandling;
 
-    [ObservableProperty] private ScannerStatus _scannerStatus = ScannerStatus.Disconnected;
-    [ObservableProperty] private string _scannerName = AppResources.Settings_NotConnected;
-    [ObservableProperty] private bool _isToDoSignedIn;
-    [ObservableProperty] private string _toDoUserName = string.Empty;
-    [ObservableProperty] private string _cacheInfo = string.Empty;
-    [ObservableProperty] private ObservableCollection<ToDoListInfo> _availableLists = [];
-    [ObservableProperty] private ToDoListInfo? _selectedList;
-    [ObservableProperty] private bool _isTranslating;
-    [ObservableProperty] private bool _isFetchingImages;
+    [ObservableProperty] public partial ScannerStatus ScannerStatus { get; set; } = ScannerStatus.Disconnected;
+    [ObservableProperty] public partial string ScannerName { get; set; } = AppResources.Settings_NotConnected;
+    [ObservableProperty] public partial bool IsToDoSignedIn { get; set; }
+    [ObservableProperty] public partial string ToDoUserName { get; set; } = string.Empty;
+    [ObservableProperty] public partial string CacheInfo { get; set; } = string.Empty;
+    [ObservableProperty] public partial ObservableCollection<ToDoListInfo> AvailableLists { get; set; } = [];
+    [ObservableProperty] public partial ToDoListInfo? SelectedList { get; set; }
+    [ObservableProperty] public partial bool IsTranslating { get; set; }
+    [ObservableProperty] public partial bool IsFetchingImages { get; set; }
 
     partial void OnSelectedListChanged(ToDoListInfo? value)
     {

@@ -43,7 +43,7 @@ public partial class App : Application
             {
                 Preferences.Remove(CrashPrefKey);
                 if (_shell.CurrentPage != null)
-                    await _shell.CurrentPage.DisplayAlert(
+                    await _shell.CurrentPage.DisplayAlertAsync(
                         global::SocketMobileGroceryScanner.Resources.Strings.AppResources.Crash_Title, crash, global::SocketMobileGroceryScanner.Resources.Strings.AppResources.Common_Ok);
             }
 

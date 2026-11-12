@@ -10,18 +10,18 @@ public partial class ScannerConnectViewModel : BaseViewModel
 {
     private readonly IScannerService _scanner;
 
-    [ObservableProperty] private ObservableCollection<BluetoothDeviceInfo> _devices = [];
-    [ObservableProperty] private bool _isConnected;
-    [ObservableProperty] private bool _isConnecting;
-    [ObservableProperty] private string _connectionStatusText = AppResources.Scanner_Initializing;
-    [ObservableProperty] private string _errorMessage = string.Empty;
-    [ObservableProperty] private bool _hasError;
-    [ObservableProperty] private string _testBarcode = string.Empty;
-    [ObservableProperty] private bool _hasTestBarcode;
+    [ObservableProperty] public partial ObservableCollection<BluetoothDeviceInfo> Devices { get; set; } = [];
+    [ObservableProperty] public partial bool IsConnected { get; set; }
+    [ObservableProperty] public partial bool IsConnecting { get; set; }
+    [ObservableProperty] public partial string ConnectionStatusText { get; set; } = AppResources.Scanner_Initializing;
+    [ObservableProperty] public partial string ErrorMessage { get; set; } = string.Empty;
+    [ObservableProperty] public partial bool HasError { get; set; }
+    [ObservableProperty] public partial string TestBarcode { get; set; } = string.Empty;
+    [ObservableProperty] public partial bool HasTestBarcode { get; set; }
 
     // No longer used but kept for interface compat
-    [ObservableProperty] private BluetoothDeviceInfo? _selectedDevice;
-    [ObservableProperty] private bool _canConnect;
+    [ObservableProperty] public partial BluetoothDeviceInfo? SelectedDevice { get; set; }
+    [ObservableProperty] public partial bool CanConnect { get; set; }
 
     public bool IsDisconnected => !IsConnected && !IsConnecting;
 
